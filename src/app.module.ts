@@ -1,15 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Lesson } from './Domain/Entities/Lesson';
-import { Teacher } from './Domain/Entities/Teacher';
-import { TeacherClassroomLesson } from './Domain/Entities/TeacherClassroomLesson';
-import { Student } from './Domain/Entities/Student';
-import { Classroom } from './Domain/Entities/Classroom';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TeacherController } from './Presentation/TeacherController';
-import { AddTeacherCommandHandler } from './Application/Teacher/Commands/AddTeacher';
 import { Provide } from './Infrastructure/Persistence/Provide';
 
+const provide:Provide = new Provide();
 
 @Module({
   imports: [
@@ -24,10 +19,10 @@ import { Provide } from './Infrastructure/Persistence/Provide';
       autoLoadEntities:true
       // logging:true
     }),
-    TypeOrmModule.forFeature([Lesson,Teacher,TeacherClassroomLesson,Student,Classroom]),
+    TypeOrmModule.forFeature(provide.LoadEntity()),
     CqrsModule.forRoot()
   ],
   controllers: [TeacherController],
-  providers: new Provide().GetAllProvider(),
+  providers: provide.GetAllProvider(),
 })
 export class AppModule {}
