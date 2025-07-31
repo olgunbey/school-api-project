@@ -23,6 +23,6 @@ const provide:Provide = new Provide();
     CqrsModule.forRoot()
   ],
   controllers: [TeacherController],
-  providers: provide.GetAllProvider(),
+  
 })
 export class AppModule {}

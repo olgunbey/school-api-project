@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
+import { AddTeacherCommand } from 'src/Application/Teacher/Commands/AddTeacher';
 import { AddTeacherDto } from 'src/Application/Teacher/Dtos/AddTeacherDto';
-import { AddTeacherCommand } from 'src/Application/Teacher/Handlers/AddTeacherCommand';
 import { Teacher } from 'src/Domain/Entities/Teacher';
 
 @Controller('Teacher')

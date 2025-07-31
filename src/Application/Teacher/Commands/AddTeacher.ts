@@ -1,9 +1,17 @@
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
-import { AddTeacherCommand } from "../Handlers/AddTeacherCommand";
 import { ITeacherRepository } from "../Interfaces/ITeacherRepository";
 import { Teacher } from "src/Domain/Entities/Teacher";
 import { Inject } from "@nestjs/common";
 
+
+export class AddTeacherCommand {
+    constructor(
+        public readonly Name:string,
+        public readonly Surname:string,
+        public readonly Mail:string,
+        public readonly Password:string,
+    ){}
+}
 
 @CommandHandler(AddTeacherCommand)
 export class AddTeacherCommandHandler implements ICommandHandler<AddTeacherCommand> {
