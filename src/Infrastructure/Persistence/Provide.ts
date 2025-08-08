@@ -6,8 +6,10 @@ import { Teacher } from "src/Domain/Entities/Teacher";
 import { TeacherClassroomLesson } from "src/Domain/Entities/TeacherClassroomLesson";
 import { Student } from "src/Domain/Entities/Student";
 import { Classroom } from "src/Domain/Entities/Classroom";
+import { UpdateTeacherCommandHandler } from "src/Application/Teacher/Commands/UpdateTeacher";
 
 export class Provide {
+    
      GetAllProvider(): Provider[] {
         return [
             {
@@ -21,7 +23,7 @@ export class Provide {
     private GetCommandHandler(): Provider[]
     {
         return [
-            AddTeacherCommandHandler
+            AddTeacherCommandHandler,UpdateTeacherCommandHandler
         ]
     }
     LoadEntity(): Function[]{

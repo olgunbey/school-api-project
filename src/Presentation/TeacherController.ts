@@ -2,15 +2,35 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiTags } from '@nestjs/swagger';
 import { AddTeacherCommand } from 'src/Application/Teacher/Commands/AddTeacher';
+import { UpdateTeacherCommand } from 'src/Application/Teacher/Commands/UpdateTeacher';
+import { AddTeacherDto } from 'src/Application/Teacher/Dtos/AddTeacherDto';
+import { UpdateTeacherDto } from 'src/Application/Teacher/Dtos/UpdateTeacherDto';
 import { Teacher } from 'src/Domain/Entities/Teacher';
+import { UpdateResult } from 'typeorm';
 
 @ApiTags('Teacher')
 @Controller('Teacher')
 export class TeacherController {
-  constructor(private readonly commandBus: CommandBus) {}
+  constructor(private readonly commandBus: CommandBus) { }
 
   @Post('Add')
-  async Add(@Body() addTeacherDto: AddTeacherCommand): Promise<Teacher> {
-    return await this.commandBus.execute(addTeacherDto);
+  async Add(@Body() addTeacherDto: AddTeacherDto): Promise<Teacher> {
+    var command: AddTeacherCommand = new AddTeacherCommand(
+      addTeacherDto.Name,
+      addTeacherDto.Surname,
+      addTeacherDto.Mail,
+      addTeacherDto.Password);
+
+    return await this.commandBus.execute(command);
+  }
+  @Post('Update')
+  async Update(@Body() updateTeacherDto: UpdateTeacherDto): Promise<UpdateResult> {
+    var command: UpdateTeacherCommand = new UpdateTeacherCommand(
+      updateTeacherDto.id,
+      updateTeacherDto.Surname,
+      updateTeacherDto.Name,
+      updateTeacherDto.Mail,
+      updateTeacherDto.Password);
+    return await this.commandBus.execute(command);
   }
 }

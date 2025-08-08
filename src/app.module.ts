@@ -16,13 +16,14 @@ const provide:Provide = new Provide();
       password: 'checkpointpassword',
       database: 'pgTypeOrm',
       synchronize: true,
-      autoLoadEntities:true
-      // logging:true
+      autoLoadEntities:true,
+      logging:true
     }),
     TypeOrmModule.forFeature(provide.LoadEntity()),
     CqrsModule.forRoot()
   ],
   controllers: [TeacherController],
+  providers: provide.GetAllProvider(),
   
 })
 export class AppModule {}

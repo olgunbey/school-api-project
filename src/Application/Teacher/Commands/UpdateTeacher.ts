@@ -3,17 +3,35 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { ITeacherRepository } from "../Interfaces/ITeacherRepository";
 import { UpdateResult } from "typeorm";
 import { Teacher } from "src/Domain/Entities/Teacher";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class UpdateTeacherCommand {
-    constructor(
-        public readonly Id: number,
-        public readonly Surname: string,
-        public readonly Mail: string,
-        public readonly Password: string,
-    ) { }
 
 
+    @ApiProperty({example: 1})
+    public readonly Id: number;
+
+    @ApiProperty({example: 'Burak'})
+    public readonly Name: string;
+
+    @ApiProperty({example: 'Yılmaz'})
+    public readonly Surname: string;
+
+    @ApiProperty({example: 'example@outlook.com'})
+    public readonly Mail: string;
+
+    @ApiProperty({example: 'password123'})
+    public readonly Password: string;
     
+    constructor(id: number, surname: string, name: string, mail: string, password: string) {
+        this.Id = id;
+        this.Name = name;
+        this.Surname = surname;
+        this.Mail = mail;
+        this.Password = password;
+
+    }
+
     toTeacher(): Teacher {
         const teacher: Teacher = new Teacher();
         teacher.Id = this.Id;
