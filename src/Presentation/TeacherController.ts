@@ -1,10 +1,8 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiTags } from '@nestjs/swagger';
-import { AddTeacherCommand } from 'src/Application/Teacher/Commands/AddTeacher';
-import { UpdateTeacherCommand } from 'src/Application/Teacher/Commands/UpdateTeacher';
-import { AddTeacherDto } from 'src/Application/Teacher/Dtos/AddTeacherDto';
-import { UpdateTeacherDto } from 'src/Application/Teacher/Dtos/UpdateTeacherDto';
+import { AddTeacherCommand,UpdateTeacherCommand } from 'src/Application/Teacher/Commands/';
+import { AddTeacherDto,UpdateTeacherDto } from 'src/Application/Teacher/Dtos';
 import { Teacher } from 'src/Domain/Entities/Teacher';
 import { UpdateResult } from 'typeorm';
 

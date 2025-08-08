@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 
+
 export class AddTeacherDto {
 
     @ApiProperty({ example: 'Ahmet' })
